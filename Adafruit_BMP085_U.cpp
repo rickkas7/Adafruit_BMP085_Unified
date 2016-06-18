@@ -14,23 +14,16 @@
   Written by Kevin Townsend for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ***************************************************************************/
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Particle.h"
 
-#ifdef __AVR_ATtiny85__
- #include "TinyWireM.h"
- #define Wire TinyWireM
-#else
- #include <Wire.h>
-#endif
 
 #include <math.h>
 #include <limits.h>
 
-#include "Adafruit_BMP085_U.h"
+#include "Adafruit_10DOF_IMU/Adafruit_BMP085_U.h"
+
+// This is an ugly hack because that's the test used to use Write.write instead of Wire.send everywhere
+#define ARDUINO 100
 
 static bmp085_calib_data _bmp085_coeffs;   // Last read accelerometer data will be available here
 static uint8_t           _bmp085Mode;
